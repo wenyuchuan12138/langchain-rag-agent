@@ -235,7 +235,7 @@ def answer_question(question):
             generation_time = generation_time,
             total_time = total_time,
             retry_count = retry_count,
-            uesd_fallback = False
+            used_fallback = False
         )
     
     except NonRetryableModelError as error:

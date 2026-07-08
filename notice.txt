@@ -1,5 +1,0 @@
-修改代码后
-git status
-git add .
-git commit -m "Add retry and fallback mechanism"
-git push

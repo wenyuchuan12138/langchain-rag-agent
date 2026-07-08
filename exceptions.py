@@ -17,9 +17,12 @@ class ConfigurationError(RAGProjectError):
     pass
 
 class RetryableModelError(ModelGenerationError):
-    """不适合重试的大模型调用异常"""
+    """适合重试的大模型调用异常"""
     pass
 
+class NonRetryableModelError(ModelGenerationError):
+    """不适合重试的大模型调用异常。"""
+    pass
 # 继承关系如下
 # Exception
 # └── RAGProjectError
