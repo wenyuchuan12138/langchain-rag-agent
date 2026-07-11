@@ -4,11 +4,12 @@ import os
 import pandas as pd
 
 from langchain_community.document_loaders import TextLoader
-from langchain_community.document_loaders import PyPDFLoader
+# from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.document_loaders import Docx2txtLoader
 from langchain_community.document_loaders import CSVLoader
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from document_parser import parser_pdf_with_mineru
 
 from config import DOCS_DIR, CHUNK_SIZE, CHUNK_OVERLAP, SUPPORTED_EXTENSIONS
 
@@ -22,11 +23,25 @@ def load_txt_or_md(file_path):
     return documents
 
 def load_pdf(file_path):
-    loader = PyPDFLoader(file_path)
+
+    markdown_path = parser_pdf_with_mineru(file_path)
+
+    if not markdown_path:
+        raise Exception("Mineru解析失败,没有生成Markdown文件")
+
+    loader = TextLoader(
+        markdown_path,
+        encoding = "utf-8"
+    )
+
     documents = loader.load()
 
     for doc in documents:
-        doc.metadata["file_type"] = "pdf"
+        doc.metadata.update({
+            "file_type": "pdf",
+            "parser": "mineru",
+            "source_file": file_path
+        })
 
     return documents
 
@@ -88,7 +103,7 @@ def load_single_file(file_path):
     elif ext == ".csv":
         return load_csv(file_path)
     
-    elif ext == "xlsx":
+    elif ext == ".xlsx":
         return load_xlsx(file_path)
     
     else:
@@ -123,14 +138,14 @@ def split_documents(documents):
         chunk_size = CHUNK_SIZE,
         chunk_overlap = CHUNK_OVERLAP,
         separators = [
+            "\n# ",
+            "\n## ",
+            "\n### ",
             "\n\n",
             "\n",
             "。",
             "！",
             "？",
-            "：",
-            "，",
-            " ",
             ""
         ]
     )

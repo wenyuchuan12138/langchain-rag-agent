@@ -1,0 +1,56 @@
+[
+    {
+        "layout_dets": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.4512,
+                "bbox": [
+                    241,
+                    201,
+                    903,
+                    330
+                ],
+                "index": 1
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    248,
+                    206,
+                    898,
+                    238
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    250,
+                    249,
+                    741,
+                    281
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    249,
+                    293,
+                    423,
+                    325
+                ],
+                "score": 1.0,
+                "text": ""
+            }
+        ],
+        "page_info": {
+            "page_no": 0,
+            "width": 1654,
+            "height": 2339
+        }
+    }
+]

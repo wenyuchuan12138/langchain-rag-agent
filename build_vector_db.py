@@ -10,7 +10,7 @@ from vector_db import build_vector_db
 
 def main():
     health_ok = run_health_check(
-        requrie_vector_db = False
+        require_vector_db = False
     )
 
     if not health_ok:

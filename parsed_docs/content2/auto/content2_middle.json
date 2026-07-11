@@ -1,0 +1,176 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "score": 0.4512,
+                    "bbox": [
+                        86,
+                        72,
+                        325,
+                        118
+                    ],
+                    "index": 1,
+                    "type": "text",
+                    "lines": [
+                        {
+                            "bbox": [
+                                89,
+                                74,
+                                323,
+                                85
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        89,
+                                        74,
+                                        323,
+                                        85
+                                    ],
+                                    "type": "text",
+                                    "content": "Embedding 阿里阿里爸爸阿里巴巴是个快乐的青年",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                90,
+                                89,
+                                266,
+                                101
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        90,
+                                        89,
+                                        266,
+                                        101
+                                    ],
+                                    "type": "text",
+                                    "content": "Llm 问世间情为何物，直教人生死相依",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                89,
+                                105,
+                                152,
+                                117
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        89,
+                                        105,
+                                        152,
+                                        117
+                                    ],
+                                    "type": "text",
+                                    "content": "Rag 是个玩意",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "page_idx": 0,
+            "page_size": [
+                595,
+                841
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "score": 0.4512,
+                    "bbox": [
+                        86,
+                        72,
+                        325,
+                        118
+                    ],
+                    "index": 1,
+                    "type": "text",
+                    "lines": [
+                        {
+                            "bbox": [
+                                89,
+                                74,
+                                323,
+                                85
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        89,
+                                        74,
+                                        323,
+                                        85
+                                    ],
+                                    "type": "text",
+                                    "content": "Embedding 阿里阿里爸爸阿里巴巴是个快乐的青年",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                90,
+                                89,
+                                266,
+                                101
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        90,
+                                        89,
+                                        266,
+                                        101
+                                    ],
+                                    "type": "text",
+                                    "content": "Llm 问世间情为何物，直教人生死相依",
+                                    "score": 1.0
+                                }
+                            ]
+                        },
+                        {
+                            "bbox": [
+                                89,
+                                105,
+                                152,
+                                117
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        89,
+                                        105,
+                                        152,
+                                        117
+                                    ],
+                                    "type": "text",
+                                    "content": "Rag 是个玩意",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "bbox_fs": [
+                        89,
+                        74,
+                        323,
+                        117
+                    ]
+                }
+            ]
+        }
+    ],
+    "_backend": "pipeline",
+    "_version_name": "3.4.4"
+}

@@ -1,0 +1,21 @@
+[
+    [
+        {
+            "type": "paragraph",
+            "content": {
+                "paragraph_content": [
+                    {
+                        "type": "text",
+                        "content": "Embedding 阿里阿里爸爸阿里巴巴是个快乐的青年Llm 问世间情为何物，直教人生死相依Rag 是个玩意"
+                    }
+                ]
+            },
+            "bbox": [
+                144,
+                85,
+                546,
+                140
+            ]
+        }
+    ]
+]
