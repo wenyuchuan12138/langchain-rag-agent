@@ -2,7 +2,6 @@ import hashlib
 import json
 import shutil
 from pathlib import Path
-from json import JSONDecodeError
 
 from config import (
     INCOMING_DIR,
@@ -19,6 +18,7 @@ from vector_db import (
     delete_documents_from_vector_db
 )
 
+# ensure_directories()确保三个文件夹存在，不存在就创建
 def ensure_directories():
     Path(INCOMING_DIR).mkdir(exist_ok = True)
     Path(PROCESSED_DIR).mkdir(exist_ok = True)
@@ -63,9 +63,13 @@ def save_manifest(manifest):
     )as file:
         # 保存清单
         json.dump(
+            # 写入json的python对象
             manifest,
+            # 已打开的文件对象，json.dump会把json文本写入这个文件
             file,
+            # False直接写入中文和其他Unicode字符
             ensure_ascii = False,
+            # 指定json缩进空格数
             indent = 2
         )
 
@@ -75,18 +79,26 @@ def create_chunk_ids(file_hash, chunks):
     for index, chunk in enumerate(chunks, start = 1):
         chunk_id = (f"{file_hash}_chunk_{index}")
 
+        # metadata是每个文本块chunk对象自带的一个字典，用于保存该文本块相关的额外信息
+        # chunk是对象，chunk.page_content是文本内容，chunk.metadate是字典
         chunk.metadata["vector_id"] = chunk_id
         ids.append(chunk_id)
 
     return ids
 
+# 处理一个待入库文件，并把它增量写入向量库
+                # file_path待处理文件的路径对象 manifest当前内存中清单字典，用来记录已处理文件的哈希和chunk_id
 def process_file(file_path, manifest):
+    # 待处理文件名
     file_name = file_path.name
+    # 待处理文件内容哈希
     file_hash = calculate_file_hash(file_path)
 
+    # 取出旧记录
     old_record = manifest.get(file_name)
 
     if old_record:
+        # 取出旧哈希
         old_hash = old_record.get("file_hash")
 
         if old_hash == file_hash:
@@ -94,12 +106,14 @@ def process_file(file_path, manifest):
 
             return "skipped"
         
+        # 如果文件更新，用旧chunk_ids调用delete_documents_from_vector_db()删除旧向量
         old_ids = old_record.get("chunk_ids", [])
         
         logger.info(f"检测到文件更新，删除旧向量: {file_name}")
 
         delete_documents_from_vector_db(old_ids)
 
+    # 取出文件内容
     documents = load_single_file(str(file_path))
 
     if len(documents) == 0:
@@ -135,9 +149,11 @@ def move_file(file_path, target_dir):
     target_path = Path(target_dir) / file_path.name
 
     if target_path.exists():
+                    # unlink()删除文件,path.unlink() = os.remove()   
         target_path.unlink()
 
     # 把文件从incoming/移动到processed/
+    # shutil.move(), shutil.copy2("c:/tmp/a.txt", "c:/dest/a.txt")复制并尽量保留元数据, shutil.rmtree("c:/temp/some_dir")删除整个目录树
     shutil.move(
         str(file_path),
         str(target_path)

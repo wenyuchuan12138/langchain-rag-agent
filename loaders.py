@@ -88,7 +88,7 @@ def load_xlsx(file_path):
 def load_single_file(file_path):
            # 把文件路径拆成文件主体和后缀
     _, ext = os.path.splitext(file_path)
-    # 同意转换成小写
+    # 统一转换成小写
     ext = ext.lower()
 
     if ext == ".txt" or ext == ".md":

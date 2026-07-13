@@ -57,7 +57,7 @@ def load_vectorstore():
 
     return vectorstore
 
-# 负责加载旧库并追加
+# 加载现有chroma向量库，将传入的文档列表documents追加到向量库中，并用ids作为每个文档的向量id，返回已添加文档数量
 def add_documents_to_vector_db(documents, ids):
     vectorstore = load_vectorstore()
 
@@ -69,7 +69,7 @@ def add_documents_to_vector_db(documents, ids):
 
     return len(ids)
 
-# 增加删除函数
+# 如果ids为空，直接返回，不做任何操作，否则加载现有chroma向量库，从向量库中删除对应ids的向量
 def delete_documents_from_vector_db(ids):
     if not ids:
         return
