@@ -49,7 +49,7 @@ langchain-huggingface==1.2.2
 langchain-openai==1.2.2
 langchain-protocol==0.0.15
 langchain-text-splitters==1.1.2
-langgraph==1.2.4
+langgraph>=1.0.2,<2.0.0
 langgraph-checkpoint==4.1.1
 langgraph-prebuilt==1.0.7
 langgraph-sdk==0.4.2
