@@ -56,3 +56,23 @@ def load_vectorstore():
     )
 
     return vectorstore
+
+# 负责加载旧库并追加
+def add_documents_to_vector_db(documents, ids):
+    vectorstore = load_vectorstore()
+
+    # 把新的document列表加入到现有向量库中
+    vectorstore.add_documents(
+        documents = documents,
+        ids = ids
+    )
+
+    return len(ids)
+
+# 增加删除函数
+def delete_documents_from_vector_db(ids):
+    if not ids:
+        return
+    
+    vectorstore = load_vectorstore()
+    vectorstore.delete(ids = ids)

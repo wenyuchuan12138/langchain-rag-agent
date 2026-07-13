@@ -3,3 +3,8 @@ git status
 git add .
 git commit -m "Add retry and fallback mechanism"说明做了什么
 git push
+
+向量更新
+把新文件放进incoming/
+运行incremental_index.py
+incoming新资料入库库;processed成功入库后的原文件;failed解析或入库失败的文件;index_manifest.json记录文件哈希和对应chunk ID

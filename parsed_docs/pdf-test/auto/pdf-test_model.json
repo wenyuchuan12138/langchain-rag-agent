@@ -4,22 +4,22 @@
             {
                 "cls_id": 17,
                 "label": "paragraph_title",
-                "score": 0.854,
+                "score": 0.6907,
                 "bbox": [
-                    244,
-                    202,
-                    805,
+                    243,
+                    201,
+                    806,
                     239
                 ],
                 "index": 1
             },
             {
-                "cls_id": 17,
-                "label": "paragraph_title",
-                "score": 0.6452,
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.6475,
                 "bbox": [
                     243,
-                    246,
+                    245,
                     1166,
                     285
                 ],
@@ -28,10 +28,10 @@
             {
                 "cls_id": 21,
                 "label": "table",
-                "score": 0.9797,
+                "score": 0.9814,
                 "bbox": [
-                    232,
-                    369,
+                    231,
+                    368,
                     1420,
                     538
                 ],
@@ -41,14 +41,27 @@
             {
                 "cls_id": 14,
                 "label": "image",
-                "score": 0.973,
+                "score": 0.9501,
                 "bbox": [
-                    250,
-                    638,
-                    1406,
-                    1172
+                    248,
+                    634,
+                    1407,
+                    1173
                 ],
                 "index": 4
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9893,
+                "bbox": [
+                    124,
+                    1228,
+                    1527,
+                    2119
+                ],
+                "index": 5,
+                "html": "<table><tr><td rowspan=1 colspan=1>文献名字</td><td rowspan=1 colspan=1>研究内容概括</td></tr><tr><td rowspan=1 colspan=1>Carbon-Aware Computing for Datacenters</td><td rowspan=1 colspan=1>提出数据中心碳感知计算管理系统，以日前碳强度预测形成可用计算容量曲线；是本文“预测到容量”转换的直接依据。</td></tr><tr><td rowspan=1 colspan=1>Measuring the Carbon Intensity of AI in CloudInstances</td><td rowspan=1 colspan=1>建立AI软件运行碳排放核算框架，说明时段与区域碳强度差异会显著影响 AI运行排放。</td></tr><tr><td rowspan=1 colspan=1>Carbon-Aware Computing for Data Centers withProbabilistic Performance Guarantees</td><td rowspan=1 colspan=1>研究含不确定性和性能保证的数据中心碳感知负荷整形，支持本文加入风险缓冲与预测误差评估。</td></tr><tr><td rowspan=1 colspan=1>Markovian RNN</td><td rowspan=1 colspan=1>以HMM状态概率控制不同循环单元的状态转移，为现有MarkovianHMM—LSTM软门控提供方法依据。</td></tr><tr><td rowspan=1 colspan=1>A New Approach to the Economic Analysis ofNonstationary Time Series</td><td rowspan=1 colspan=1>提出马尔可夫状态转换建模思路，为电网碳强度的非平稳状态划分提供理论基础。</td></tr><tr><td rowspan=1 colspan=1>Modeling Long- and Short-Term Temporal Patternswith Deep Neural Networks</td><td rowspan=1 colspan=1>同时建模短期局部依赖与长期周期模式，支持24小时短期分支和168小时长期周期分支。</td></tr><tr><td rowspan=1 colspan=1>Towards the Systematic Reporting of the Energyand Carbon Footprints of Machine Learning</td><td rowspan=1 colspan=1>提出机器学习能源与碳足迹的系统报告框架，支持本文明确单位算力能耗、情景参数与边界。</td></tr><tr><td rowspan=1 colspan=1>Energy and Policy Considerations for Deep</td><td rowspan=1 colspan=1>揭示深度学习训练的能源与碳成本，说明面向AI负荷的碳预算研</td></tr></table>"
             },
             {
                 "label": "ocr_text",
@@ -56,7 +69,7 @@
                     249,
                     207,
                     797,
-                    235
+                    236
                 ],
                 "score": 1.0,
                 "text": ""
@@ -64,10 +77,10 @@
             {
                 "label": "ocr_text",
                 "bbox": [
-                    249,
-                    249,
-                    1161,
-                    281
+                    251,
+                    251,
+                    1160,
+                    280
                 ],
                 "score": 1.0,
                 "text": ""
@@ -75,6 +88,28 @@
         ],
         "page_info": {
             "page_no": 0,
+            "width": 1654,
+            "height": 2339
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9875,
+                "bbox": [
+                    125,
+                    196,
+                    1527,
+                    552
+                ],
+                "index": 1,
+                "html": "<table><tr><td rowspan=1 colspan=1>文献名字</td><td rowspan=1 colspan=1>研究内容概括</td></tr><tr><td rowspan=1 colspan=1>Learning in NLP</td><td rowspan=1 colspan=1>究具有现实意义。</td></tr><tr><td rowspan=1 colspan=1>Energy and AI</td><td rowspan=1 colspan=1>汇总AI相关能源需求与电力系统影响，支撑研究背景中AI负荷增长与电力需求压力的宏观论述。</td></tr><tr><td rowspan=1 colspan=1>Electricity Maps API Documentation</td><td rowspan=1 colspan=1>说明碳强度、负荷、清洁电力比例等小时级信号的定义与获取方式，是本文电网侧数据说明的依据。</td></tr></table>"
+            }
+        ],
+        "page_info": {
+            "page_no": 1,
             "width": 1654,
             "height": 2339
         }

@@ -21,3 +21,9 @@ LLM_TIMEOUT = 30
 MAX_RETRIES = 3
 # 第一次重试前等待时间
 RETRY_BASE_DELAY = 1.0
+
+INCOMING_DIR = "incoming"
+PROCESSED_DIR = "processed"
+FAILED_DIR = "failed"
+
+MANIFEST_FILE = "index_manifest.json"

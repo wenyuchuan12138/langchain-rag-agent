@@ -1,0 +1,2 @@
+incremental_index 是一个用来逐渐增量的向量库函数
+test 这是说明哈希是根据内容来排列的

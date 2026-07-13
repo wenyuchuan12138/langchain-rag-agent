@@ -1,0 +1,9 @@
+{
+  "增量test.txt": {
+    "file_hash": "fddaf714f3b977040f69d5b86e64b99cbf0a572db6ffc9c40f4c281b9afe341a",
+    "chunk_ids": [
+      "fddaf714f3b977040f69d5b86e64b99cbf0a572db6ffc9c40f4c281b9afe341a_chunk_1"
+    ],
+    "chunk_count": 1
+  }
+}
