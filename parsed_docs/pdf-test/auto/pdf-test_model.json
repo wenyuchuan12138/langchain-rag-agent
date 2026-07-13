@@ -1,0 +1,82 @@
+[
+    {
+        "layout_dets": [
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.854,
+                "bbox": [
+                    244,
+                    202,
+                    805,
+                    239
+                ],
+                "index": 1
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.6452,
+                "bbox": [
+                    243,
+                    246,
+                    1166,
+                    285
+                ],
+                "index": 2
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9797,
+                "bbox": [
+                    232,
+                    369,
+                    1420,
+                    538
+                ],
+                "index": 3,
+                "html": "<table><tr><td rowspan=1 colspan=1>Chain</td><td rowspan=1 colspan=1>我现在正在做的</td></tr><tr><td rowspan=1 colspan=1>Graph</td><td rowspan=1 colspan=1>差不多东西</td></tr><tr><td rowspan=1 colspan=1>Chatgpt</td><td rowspan=1 colspan=1>一个很强大的网站，有任何问题都可以问</td></tr><tr><td rowspan=1 colspan=1>Codex</td><td rowspan=1 colspan=1>自主运行相关任务，省事省时间</td></tr></table>"
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.973,
+                "bbox": [
+                    250,
+                    638,
+                    1406,
+                    1172
+                ],
+                "index": 4
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    249,
+                    207,
+                    797,
+                    235
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    249,
+                    249,
+                    1161,
+                    281
+                ],
+                "score": 1.0,
+                "text": ""
+            }
+        ],
+        "page_info": {
+            "page_no": 0,
+            "width": 1654,
+            "height": 2339
+        }
+    }
+]

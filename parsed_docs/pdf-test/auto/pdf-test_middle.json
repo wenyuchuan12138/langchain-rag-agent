@@ -1,0 +1,344 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "score": 0.854,
+                    "bbox": [
+                        87,
+                        72,
+                        289,
+                        86
+                    ],
+                    "index": 1,
+                    "type": "title",
+                    "lines": [
+                        {
+                            "bbox": [
+                                89,
+                                74,
+                                286,
+                                84
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        89,
+                                        74,
+                                        286,
+                                        84
+                                    ],
+                                    "type": "text",
+                                    "content": "Llm 是一个大模型用来去调用知识回答问题",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "score": 0.6452,
+                    "bbox": [
+                        87,
+                        88,
+                        419,
+                        102
+                    ],
+                    "index": 2,
+                    "type": "title",
+                    "lines": [
+                        {
+                            "bbox": [
+                                89,
+                                89,
+                                417,
+                                101
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        89,
+                                        89,
+                                        417,
+                                        101
+                                    ],
+                                    "type": "text",
+                                    "content": "Embedding 是向量转换工具很强，但是是一个中介，需要更好的发射器",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        83,
+                        132,
+                        511,
+                        193
+                    ],
+                    "blocks": [
+                        {
+                            "score": 0.9797,
+                            "bbox": [
+                                83,
+                                132,
+                                511,
+                                193
+                            ],
+                            "index": 3,
+                            "type": "table_body",
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        83,
+                                        132,
+                                        511,
+                                        193
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                83,
+                                                132,
+                                                511,
+                                                193
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Chain</td><td rowspan=1 colspan=1>我现在正在做的</td></tr><tr><td rowspan=1 colspan=1>Graph</td><td rowspan=1 colspan=1>差不多东西</td></tr><tr><td rowspan=1 colspan=1>Chatgpt</td><td rowspan=1 colspan=1>一个很强大的网站，有任何问题都可以问</td></tr><tr><td rowspan=1 colspan=1>Codex</td><td rowspan=1 colspan=1>自主运行相关任务，省事省时间</td></tr></table>",
+                                            "image_path": "8b7bda5ebdbfbea0aa64c369fe3e7033312c782cb6babb6d224776633a460115.jpg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 3,
+                    "score": 0.9797
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        90,
+                        229,
+                        506,
+                        421
+                    ],
+                    "blocks": [
+                        {
+                            "score": 0.973,
+                            "bbox": [
+                                90,
+                                229,
+                                506,
+                                421
+                            ],
+                            "index": 4,
+                            "type": "image_body",
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        90,
+                                        229,
+                                        506,
+                                        421
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                90,
+                                                229,
+                                                506,
+                                                421
+                                            ],
+                                            "type": "image",
+                                            "image_path": "2b3e0e220722249f33603c2eaf7df84caca71818060568950036b474ffe4d963.jpg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 4,
+                    "score": 0.973
+                }
+            ],
+            "page_idx": 0,
+            "page_size": [
+                595,
+                841
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "score": 0.854,
+                    "bbox": [
+                        87,
+                        72,
+                        289,
+                        86
+                    ],
+                    "index": 1,
+                    "type": "title",
+                    "lines": [
+                        {
+                            "bbox": [
+                                89,
+                                74,
+                                286,
+                                84
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        89,
+                                        74,
+                                        286,
+                                        84
+                                    ],
+                                    "type": "text",
+                                    "content": "Llm 是一个大模型用来去调用知识回答问题",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "score": 0.6452,
+                    "bbox": [
+                        87,
+                        88,
+                        419,
+                        102
+                    ],
+                    "index": 2,
+                    "type": "title",
+                    "lines": [
+                        {
+                            "bbox": [
+                                89,
+                                89,
+                                417,
+                                101
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        89,
+                                        89,
+                                        417,
+                                        101
+                                    ],
+                                    "type": "text",
+                                    "content": "Embedding 是向量转换工具很强，但是是一个中介，需要更好的发射器",
+                                    "score": 1.0
+                                }
+                            ]
+                        }
+                    ],
+                    "level": 2
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        83,
+                        132,
+                        511,
+                        193
+                    ],
+                    "blocks": [
+                        {
+                            "score": 0.9797,
+                            "bbox": [
+                                83,
+                                132,
+                                511,
+                                193
+                            ],
+                            "index": 3,
+                            "type": "table_body",
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        83,
+                                        132,
+                                        511,
+                                        193
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                83,
+                                                132,
+                                                511,
+                                                193
+                                            ],
+                                            "type": "table",
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Chain</td><td rowspan=1 colspan=1>我现在正在做的</td></tr><tr><td rowspan=1 colspan=1>Graph</td><td rowspan=1 colspan=1>差不多东西</td></tr><tr><td rowspan=1 colspan=1>Chatgpt</td><td rowspan=1 colspan=1>一个很强大的网站，有任何问题都可以问</td></tr><tr><td rowspan=1 colspan=1>Codex</td><td rowspan=1 colspan=1>自主运行相关任务，省事省时间</td></tr></table>",
+                                            "image_path": "8b7bda5ebdbfbea0aa64c369fe3e7033312c782cb6babb6d224776633a460115.jpg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 3,
+                    "score": 0.9797
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        90,
+                        229,
+                        506,
+                        421
+                    ],
+                    "blocks": [
+                        {
+                            "score": 0.973,
+                            "bbox": [
+                                90,
+                                229,
+                                506,
+                                421
+                            ],
+                            "index": 4,
+                            "type": "image_body",
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        90,
+                                        229,
+                                        506,
+                                        421
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                90,
+                                                229,
+                                                506,
+                                                421
+                                            ],
+                                            "type": "image",
+                                            "image_path": "2b3e0e220722249f33603c2eaf7df84caca71818060568950036b474ffe4d963.jpg"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 4,
+                    "score": 0.973
+                }
+            ]
+        }
+    ],
+    "_backend": "pipeline",
+    "_version_name": "3.4.4"
+}
