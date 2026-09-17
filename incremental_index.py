@@ -8,7 +8,8 @@ from config import (
     PROCESSED_DIR,
     FAILED_DIR,
     MANIFEST_FILE,
-    SUPPORTED_EXTENSIONS
+    SUPPORTED_EXTENSIONS,
+    FORCE_REINDEX
 )
 
 from loaders import load_single_file, split_documents
@@ -76,14 +77,42 @@ def save_manifest(manifest):
 def create_chunk_ids(file_hash, chunks):
     ids = []
 
-    for index, chunk in enumerate(chunks, start = 1):
-        chunk_id = (f"{file_hash}_chunk_{index}")
+    for index, chunk in enumerate(
+        chunks,
+        start = 1
+    ):
+        # 1.向量数据库内部ID保持完整hash，保证唯一
+        vector_id = (
+            f"{file_hash}_chunk_{index}"
+        )
 
-        # metadata是每个文本块chunk对象自带的一个字典，用于保存该文本块相关的额外信息
-        # chunk是对象，chunk.page_content是文本内容，chunk.metadate是字典
-        chunk.metadata["vector_id"] = chunk_id
-        ids.append(chunk_id)
+        # 2.获取原始文件名
+        file_name = chunk.metadata.get(
+            "original_file",
+            "unknown"
+        )
 
+        # 去掉.pdf .docx等拓展名，得到文件名
+        file_stem = Path(file_name).stem
+
+        # 3.给用户看的文本块ID
+       
+        chunk_id = (
+            f"{file_stem}_{index}"
+        )
+
+        chunk.metadata["vector_id"] = (
+            vector_id
+        )
+
+        chunk.metadata["chunk_id"] = (
+            chunk_id
+        )
+
+        # 真正写入Chroma的仍然是vector_id
+        ids.append(vector_id)
+        
+    
     return ids
 
 # 处理一个待入库文件，并把它增量写入向量库
@@ -98,20 +127,44 @@ def process_file(file_path, manifest):
     old_record = manifest.get(file_name)
 
     if old_record:
-        # 取出旧哈希
+        # 取出旧文件哈希
         old_hash = old_record.get("file_hash")
 
+        # 取出旧向量ID
+        old_ids  = old_record.get(
+            "chunk_ids",
+            []
+        )
+
+        # 文件内容没有变化
         if old_hash == file_hash:
-            logger.info(f"文件未发生变化，跳过: {file_name}")
 
-            return "skipped"
-        
-        # 如果文件更新，用旧chunk_ids调用delete_documents_from_vector_db()删除旧向量
-        old_ids = old_record.get("chunk_ids", [])
-        
-        logger.info(f"检测到文件更新，删除旧向量: {file_name}")
+            # 正常模式
+            if not FORCE_REINDEX:
+                logger.info(
+                    f"文化未发生变化,跳过:{file_name}"
+                )
 
-        delete_documents_from_vector_db(old_ids)
+                return "skipped"
+
+            # 强制重建模式
+            logger.info(
+                f"强制重新索引文件,删除旧向量:{file_name}"
+            )
+
+            delete_documents_from_vector_db(
+                old_ids
+            )
+
+        # 文件内容发生变化
+        else:
+            logger.info(
+                f"检测到文件更新,删除旧向量:{file_name}"
+            )
+
+            delete_documents_from_vector_db(
+                old_ids
+            )
 
     # 取出文件内容
     documents = load_single_file(str(file_path))

@@ -1,0 +1,52 @@
+[
+  {
+    "question": "LangChain是什么？",
+    "expected_chunk_ids": ["49", "48", "rag_langchain_knowledge_word_1"],
+    "should_reject": false
+  },
+  {
+    "question": "Embedding是什么？",
+    "expected_chunk_ids": ["rag_langchain_knowledge_word_6", "rag_embedding_langchain_test_37", "2"],
+    "should_reject": false
+  },
+  {
+    "question": "Agent是什么？",
+    "expected_chunk_ids": ["49"],
+    "should_reject": false
+  },
+  {
+    "question": "向量库是什么？",
+    "expected_chunk_ids": ["rag_langchain_knowledge_word_7"],
+    "should_reject": false
+  },
+  {
+    "question": "怎样让大模型利用外部资料回答问题？",
+    "expected_chunk_ids": ["50", "48"],
+    "should_reject": false
+  },
+  {
+    "question": "如何把文档转换成便于语义检索的表示？",
+    "expected_chunk_ids": ["rag_langchain_knowledge_word_6"],
+    "should_reject": false
+  },
+  {
+    "question": "Embedding和向量库有什么区别？",
+    "expected_chunk_ids": ["rag_langchain_knowledge_word_6"],
+    "should_reject": false
+  },
+  {
+    "question": "RAG和Agent有什么区别？",
+    "expected_chunk_ids": ["49", "50"],
+    "should_reject": false
+  },
+  {
+    "question": "苹果公司今天股价是多少？",
+    "expected_chunk_ids": [],
+    "should_reject": true
+  },
+  {
+    "question": "今天天气怎么样？",
+    "expected_chunk_ids": [],
+    "should_reject": true
+  }
+]

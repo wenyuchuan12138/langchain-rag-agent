@@ -46,3 +46,16 @@ python build_vector_db.py
 
 启动问答系统
 python rag_qa.py
+
+向量文件更新
+把新文件放进incoming/
+运行incremental_index.py
+incoming新资料入库库;processed成功入库后的原文件;failed解析或入库失败的文件;index_manifest.json记录文件哈希和对应chunk ID
+
+激活环境
+.\.venv\Scripts\Activate.ps1
+
+验证检索成功率或者recall
+先在inspect_eval_chunks.py中加入想测试的问题，并允许
+将输出的内容人工挑选按格式填入eval_cases.json中
+运行evaluate_ablation.py

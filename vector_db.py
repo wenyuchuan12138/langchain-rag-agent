@@ -3,12 +3,17 @@
 import os
 import shutil
 
+os.environ.setdefault(
+    "HF_ENDPOINT",
+    "https://hf-mirror.com"
+)
+
 # 必须写在导入 HuggingFaceEmbeddings 之前
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+# os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 
 # 强制使用本地缓存，不主动联网检查 HuggingFace
-os.environ["HF_HUB_OFFLINE"] = "1"
-os.environ["TRANSFORMERS_OFFLINE"] = "1"
+# os.environ["HF_HUB_OFFLINE"] = "1"
+# os.environ["TRANSFORMERS_OFFLINE"] = "1"
 
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
@@ -18,15 +23,19 @@ from config import CHROMA_DIR, EMBEDDING_MODEL
 
 def get_embeddings():
     # 创建 embedding 模型
+    LOCAL_MODEL_PATH = (
+    r"C:\Users\len\.cache\huggingface\hub\models--sentence-transformers--paraphrase-multilingual-MiniLM-L12-v2\snapshots\e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+)
+    
     embeddings = HuggingFaceEmbeddings(
-        model_name=EMBEDDING_MODEL,
+        model_name=LOCAL_MODEL_PATH,
+
         model_kwargs={
-            "device": "cpu",
-            # 只从本地加载模型，不联网
-            "local_files_only": True
+            "device":"cpu"
         },
+
         encode_kwargs={
-            "normalize_embeddings": True
+            "normalize_embeddings":True
         }
     )
 

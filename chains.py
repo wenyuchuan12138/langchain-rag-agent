@@ -12,12 +12,15 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 
+from hybrid_retriever import HybridRetriever
+
 from config import (
     TOP_K,
     MAX_DISTANCE,
     LLM_TIMEOUT,
     MAX_RETRIES,
-    RETRY_BASE_DELAY
+    RETRY_BASE_DELAY,
+    RETRIEVAL_TOP_K
 )
 
 from exceptions import (
@@ -57,6 +60,8 @@ def get_llm():
 
 vectorstore = load_vectorstore()
 
+hybrid_retriever = HybridRetriever(vectorstore)
+
 llm = get_llm()
 prompt = get_rag_prompt()
 parser = StrOutputParser()
@@ -73,25 +78,26 @@ def retrieve_documents(question):
             f"开始检索资料，问题:{question}"
         )
 
-        results = (
-            vectorstore.similarity_search_with_score(
-                question,
-                k = TOP_K
-            )
+        results = hybrid_retriever.search(
+            question,
+            RETRIEVAL_TOP_K
         )
 
         filtered_documents = []
+        # filtered_documents.sort(
+        #     key = lambda x:x[1]
+        # )
         source_list = []
 
         for doc, score in results:
-            if score <= MAX_DISTANCE:
+            # if score <= MAX_DISTANCE:
                 filtered_documents.append(
                     (doc, score)
                 )
 
                 source_info = SourceInfo(
                     source = doc.metadata.get(
-                        "chunk_id",
+                        "source",
                         "未知来源"
                     ),
                     chunk_id = doc.metadata.get(
@@ -252,7 +258,7 @@ def answer_question(question):
             generation_time = generation_time,
             total_time = total_time,
             retry_count = 0,
-            uesd_fallback = False
+            used_fallback = False
         )
     
     except RetryableModelError as error:
@@ -272,7 +278,7 @@ def answer_question(question):
             generation_time = generation_time,
             total_time = total_time,
             retry_count = MAX_RETRIES - 1,
-            uesd_fallback = True   
+            used_fallback = True   
         )
 
 # 输入一个原始异常，根据错误里包含什么，返回RetryableModelError或者NoneRetryableModelError

@@ -5,8 +5,8 @@ from health_check import run_health_check
 from logger import logger
 
 # 只负责显示来源
-def dispaly_sources(sources):
-    if len(sources) ==0:
+def display_sources(sources):
+    if len(sources) == 0:
         return
     
     print("\n参考来源:")
@@ -16,7 +16,7 @@ def dispaly_sources(sources):
             f"{index}."
             f"文件{source_info.source},"
             f"文本块:第{source_info.chunk_id}块,"
-            f"距离分数:{source_info.score:.4f}"
+            f"Reranker分数:{source_info.score:.4f}"
         )
 
 def display_timing(result):
@@ -84,7 +84,7 @@ def main():
             print("\nAI回答:")
             print(result.answer)
 
-            dispaly_sources(
+            display_sources(
                 result.sources
             )
 

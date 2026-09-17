@@ -10,6 +10,7 @@ from langchain_community.document_loaders import CSVLoader
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from document_parser import parser_pdf_with_mineru
+from markdown_splitter import split_mixed_documents
 
 from config import DOCS_DIR, CHUNK_SIZE, CHUNK_OVERLAP, SUPPORTED_EXTENSIONS
 
@@ -23,25 +24,36 @@ def load_txt_or_md(file_path):
     return documents
 
 def load_pdf(file_path):
+    """
+    使用MinerU把PDF解析成Markdown
+    再读取为Langchain Document
+    """
 
-    markdown_path = parser_pdf_with_mineru(file_path)
-
-    if not markdown_path:
-        raise Exception("Mineru解析失败,没有生成Markdown文件")
+    markdown_path = (
+        parser_pdf_with_mineru(file_path)
+    )
 
     loader = TextLoader(
-        markdown_path,
-        encoding = "utf-8"
+        str(markdown_path),
+        encoding = "utf-8" 
     )
 
     documents = loader.load()
 
     for doc in documents:
-        doc.metadata.update({
-            "file_type": "pdf",
-            "parser": "mineru",
-            "source_file": file_path
-        })
+        # source仍然记录原始PDF
+        doc.metadata["source"] = str(file_path)
+
+        # 同时记录Mineru生成的Markdown
+        doc.metadata["markdown_source"] = str(
+            str(markdown_path)
+        )
+
+        doc.metadata["file_type"] = (
+            "mineru_pdf"
+        )
+
+        doc.metadata["parser"] = "MinerU"
 
     return documents
 
@@ -107,7 +119,7 @@ def load_single_file(file_path):
         return load_xlsx(file_path)
     
     else:
-        return[]
+        return []
 
 def load_documents():
     documents = []
@@ -134,25 +146,13 @@ def load_documents():
     return documents
 
 def split_documents(documents):
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size = CHUNK_SIZE,
-        chunk_overlap = CHUNK_OVERLAP,
-        separators = [
-            "\n# ",
-            "\n## ",
-            "\n### ",
-            "\n\n",
-            "\n",
-            "。",
-            "！",
-            "？",
-            ""
-        ]
-    )
+    """
+    统一切分入口
 
-    chunks = text_splitter.split_documents(documents)
+    MinerU文档采用Markdown结构切分
+    其他文档采用普通字符切分
+    """
 
-    for index, chunk in enumerate(chunks):
-        chunk.metadata["chunk_id"] = index + 1
-    
+    chunks = split_mixed_documents(documents)
+
     return chunks

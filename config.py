@@ -11,7 +11,9 @@ CHUNK_SIZE = 100
 CHUNK_OVERLAP = 20
 
 TOP_K = 3
-MAX_DISTANCE = 2.0
+RETRIEVAL_TOP_K = 6
+FINAL_TOP_K = 3
+MAX_DISTANCE = 1.3
 
 SUPPORTED_EXTENSIONS = [".txt", ".md", ".pdf", ".docx", ".csv", ".xlsx"]
 
@@ -27,3 +29,6 @@ PROCESSED_DIR = "processed"
 FAILED_DIR = "failed"
 
 MANIFEST_FILE = "index_manifest.json"
+
+# 是否强制重新索引已经存在且内容未变化的文件
+FORCE_REINDEX = True
