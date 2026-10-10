@@ -24,7 +24,7 @@ from config import CHROMA_DIR, EMBEDDING_MODEL
 def get_embeddings():
     # 创建 embedding 模型
     LOCAL_MODEL_PATH = (
-    r"C:\Users\len\.cache\huggingface\hub\models--sentence-transformers--paraphrase-multilingual-MiniLM-L12-v2\snapshots\e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
+    r"D:\ai-learning\models\paraphrase-multilingual-MiniLM-L12-v2"
 )
     
     embeddings = HuggingFaceEmbeddings(

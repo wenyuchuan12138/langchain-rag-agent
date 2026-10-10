@@ -6,15 +6,9 @@ class Reranker:
 
     def __init__(self):
 
-            model_path = (
-                Path(__file__).resolve().parent
-                / "models"
-                / "mmarco-reranker" 
-            )
-
-            self.model = CrossEncoder(
-                str(model_path)
-            )
+        self.model = CrossEncoder(
+            r"D:\ai-learning\models\mmarco-mMiniLMv2-L12-H384-v1"
+        )
             
 
     def rerank(

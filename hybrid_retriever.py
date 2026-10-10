@@ -7,6 +7,11 @@ from config import (
 )
 import jieba
 
+from query_normalizer import normalize_query
+from query_rewriter import rewrite_query
+from multi_query import generate_multi_queries
+
+
 def tokenize_text(text):
 
     stopwords = {"的",
@@ -198,13 +203,50 @@ class HybridRetriever:
             # 正常rag时不传这个参数，和以前一样只返回最终Reranker结果。消融评估调用就改为True，同时返回Chroma、RRF、Reranker
             return_stages = False
             ):
+
+        original_question = question
+        normalized_question = normalize_query(original_question)
+        search_question = rewrite_query(normalized_question)
+        search_questions = generate_multi_queries(search_question)
+
+        print("\n==========Query处理============")
+        print(f"原始问题: {original_question}")
+        print(f"规范化后: {normalized_question}")
+        print(f"改写问题: {search_question}")
+        print(f"多查询: {search_questions}")
+
         # 向量检索
-        vector_results = (
-                            # similarity_search_with_score()返回的是元组
-            self.vectorstore.similarity_search_with_score(
-                question,
-                k = k
+        vector_result_map = {}
+
+        for query in search_questions:
+
+            current_results = (
+                self.vectorstore.similarity_search_with_score(
+                    query,
+                    k = k
+                )
             )
+
+            for doc, distance in current_results:
+
+                chunk_id = doc.metadata.get(
+                    "chunk_id",
+                    "unknown"
+                )
+
+                if (
+                    chunk_id not in vector_result_map
+                    or distance
+                    < vector_result_map[chunk_id][1]
+                ):
+                    vector_result_map[chunk_id] = (
+                        doc,
+                        distance
+                    )
+
+        vector_results = sorted(
+            vector_result_map.values(),
+            key = lambda x: x[1]
         )
 
         print("\n========== Chroma原始候选结果(过滤前) ==========")
@@ -238,7 +280,19 @@ class HybridRetriever:
             return []
 
         # BM25
-        query_tokens = tokenize_text(question)
+        query_tokens = []
+
+        for query in search_questions:
+
+            tokens = tokenize_text(
+                query
+            )
+
+            query_tokens.extend(tokens)
+
+        query_tokens = list(
+            dict.fromkeys(query_tokens)
+        )
 
         scores = self.bm25.get_scores(
             query_tokens
@@ -297,7 +351,7 @@ class HybridRetriever:
             )
 
         reranked_results = self.reranker.rerank(
-            question = question,
+            question = normalized_question,
             documents_with_scores = fused_results[:k],
             top_k = FINAL_TOP_K
         )
