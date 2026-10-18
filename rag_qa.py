@@ -3,6 +3,7 @@
 from chains import answer_question
 from health_check import run_health_check
 from logger import logger
+from contextual_query import extract_topic
 
 # 只负责显示来源
 def display_sources(sources):
@@ -62,6 +63,10 @@ def main():
     
     logger.info("RAG问答系统启动成gong")
 
+    previous_question = None
+    current_topic = None
+    chat_history = []
+
     while True:
         question = input("输入问题,输入q退出:").strip()
 
@@ -78,11 +83,32 @@ def main():
             f"收到用户问题:{question}"
         )
 
-        result = answer_question(question)
+        result = answer_question(
+            question,
+            previous_question,
+            current_topic,
+            chat_history
+            )
+
+        new_topic = extract_topic(
+            question
+        )
+
+        if new_topic:
+            current_topic = new_topic
+        
+        previous_question = question
 
         if result.success:
             print("\nAI回答:")
             print(result.answer)
+
+            chat_history.append({
+                "question": question,
+                "answer": result.answer
+            })
+
+            chat_history = chat_history[-3:]
 
             display_sources(
                 result.sources

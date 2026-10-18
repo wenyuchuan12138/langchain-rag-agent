@@ -1,3 +1,5 @@
+import re
+
 def rewrite_query(question):
 
     replacements = {
@@ -15,11 +17,38 @@ def rewrite_query(question):
             new
         )
 
+    follow_up_patterns = [
+        (
+            r"^(.+?)缺点(?:呢)?[？?]?$",
+            r"\1有什么缺点"
+        ),
+        (
+            r"^(.+?)优点(?:呢)?[？?]?$",
+            r"\1有什么优点"
+        ),
+        (
+            r"^(.+?)作用(?:呢)?[？?]?$",
+            r"\1有什么作用"
+        ),
+        (
+            r"^(.+?)优势(?:呢)?[？?]?$",
+            r"\1有什么优势"
+        ),
+        (
+            r"^(.+?)问题(?:呢)?[？?]?$",
+            r"\1有什么问题"
+        ),
+    ]
+
+    for pattern, replacement in follow_up_patterns:
+        rewritten = re.sub(
+            pattern,
+            replacement,
+            rewritten
+        )
+
     # 原问题没有发生变化
     if rewritten == question:
         return question
 
-    # 发生改写时:
-    # 原问题和改写问题都保留
     return rewritten
-    

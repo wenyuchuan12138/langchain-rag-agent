@@ -68,7 +68,11 @@ parser = StrOutputParser()
 
 answer_chain = prompt | llm | parser
 
-def retrieve_documents(question):
+def retrieve_documents(
+                    question,
+                    previous_question = None,
+                    current_topic = None
+                ):
             # time.pref_counter()从开始到现在经过多长时间，time.time()看当前时刻是什么时间,
     start_time = time.perf_counter()
 
@@ -80,7 +84,9 @@ def retrieve_documents(question):
 
         results = hybrid_retriever.search(
             question,
-            RETRIEVAL_TOP_K
+            RETRIEVAL_TOP_K,
+            previous_question = previous_question,
+            current_topic = current_topic
         )
 
         filtered_documents = []
@@ -170,10 +176,19 @@ def format_context(documents_with_scores):
     
     return "\n\n".join(context_list)
 
-def answer_question(question):
+def answer_question(
+            question,
+            previous_question = None,
+            current_topic = None,
+            chat_history = None
+        ):
     total_start_time = time.perf_counter()
 
-    retrieval_result = retrieve_documents(question)
+    retrieval_result = retrieve_documents(
+        question,
+        previous_question,
+        current_topic
+    )
 
     if not retrieval_result.success:
         total_time = (
@@ -218,7 +233,8 @@ def answer_question(question):
         answer, retry_count = (
             generate_answer_with_retry(
                 context = context,
-                question = question
+                question = question,
+                chat_history = chat_history
             )
         )
 
@@ -336,7 +352,8 @@ def calculate_retry_delay(attempt_number):
 
 def generate_answer_with_retry(
         context,
-        question
+        question,
+        chat_history = None
 ):
     last_error = None
                 
@@ -347,9 +364,25 @@ def generate_answer_with_retry(
                 f"开始第{attempt + 1}次模型调用"
             )
 
+            history_text = ""
+
+            if chat_history:
+                history_parts = []
+
+                for item in chat_history:
+                    history_parts.append(
+                        f"用户: {item['question']}\n"
+                        f"助手: {item['answer']}"
+                    )
+
+                history_text = "\n\n".join(
+                    history_parts
+                )
+
             answer = answer_chain.invoke({
                 "context": context,
-                "question": question
+                "question": question,
+                "history": history_text
             })
 
             # 如果attempt = 0表示第一次调用就成功没有重试1表示第二次调用成功，重试1次

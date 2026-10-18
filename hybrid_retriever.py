@@ -10,6 +10,7 @@ import jieba
 from query_normalizer import normalize_query
 from query_rewriter import rewrite_query
 from multi_query import generate_multi_queries
+from contextual_query import contextualize_query
 
 
 def tokenize_text(text):
@@ -201,19 +202,29 @@ class HybridRetriever:
             question,
             k = 5,
             # 正常rag时不传这个参数，和以前一样只返回最终Reranker结果。消融评估调用就改为True，同时返回Chroma、RRF、Reranker
-            return_stages = False
+            return_stages = False,
+            previous_question = None,
+            current_topic = None
             ):
 
         original_question = question
-        normalized_question = normalize_query(original_question)
+        contextual_question = contextualize_query(
+            current_question = original_question,
+            previous_question = previous_question,
+            current_topic = current_topic
+            )
+        normalized_question = normalize_query(contextual_question)
         search_question = rewrite_query(normalized_question)
         search_questions = generate_multi_queries(search_question)
 
         print("\n==========Query处理============")
+        print(f"上一轮问题:{previous_question}")
         print(f"原始问题: {original_question}")
+        print(f"上下文补全:{contextual_question}")
         print(f"规范化后: {normalized_question}")
         print(f"改写问题: {search_question}")
         print(f"多查询: {search_questions}")
+        print(f"当前主题: {current_topic}")
 
         # 向量检索
         vector_result_map = {}
